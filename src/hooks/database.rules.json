@@ -1,0 +1,50 @@
+{
+  "rules": {
+
+    "gasData": {
+      ".read":  true,
+      ".write": true
+    },
+
+    "bookings": {
+      ".read":  "auth != null",
+      ".write": "auth != null",
+      ".indexOn": ["userId"]
+    },
+
+    "notifications": {
+      ".read":  "auth != null",
+      ".write": "auth != null"
+    },
+
+    "fcmTokens": {
+      ".read":  "auth != null",
+      ".write": "auth != null"
+    },
+
+    "pushQueue": {
+      ".read":  "auth != null",
+      ".write": "auth != null"
+    },
+
+    "support": {
+      ".read":  "auth != null",
+      ".write": "auth != null"
+    },
+
+    "wallets": {
+      ".read":  "auth != null",
+      ".write": "auth != null"
+    },
+
+    "profiles": {
+      ".read":  "auth != null",
+      ".write": "auth != null"
+    },
+
+    "history": {
+      ".read":  "auth != null",
+      ".write": "auth != null"
+    }
+  }
+}

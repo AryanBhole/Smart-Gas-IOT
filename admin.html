@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Gas Agency Panel</title>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+
+<style>
+body{font-family:Arial;background:#111;color:white;padding:20px}
+.card{background:#1f2937;padding:15px;margin:10px;border-radius:10px}
+button{margin:5px;padding:6px 12px}
+</style>
+
+</head>
+
+<body>
+
+<h2>🔥 Cylinder Booking Requests</h2>
+
+<div id="list"></div>
+
+<script>
+
+var firebaseConfig = {
+apiKey: "AIzaSyBpsV93YNsGe0BhxT9b9Qo-bCpE19QRnxk",
+databaseURL:"https://gas-booking-d3f51-default-rtdb.firebaseio.com/"
+};
+
+firebase.initializeApp(firebaseConfig);
+
+var db = firebase.database();
+
+db.ref("bookings").on("value",(snap)=>{
+
+let html="";
+
+snap.forEach((child)=>{
+
+let key = child.key;
+let d = child.val();
+
+html += `
+<div class="card">
+User: ${d.userId} <br>
+Date: ${d.date} <br>
+Status: ${d.status} <br>
+
+<button onclick="update('${key}','Approved')">Approve</button>
+<button onclick="update('${key}','Out for Delivery')">Dispatch</button>
+<button onclick="update('${key}','Delivered')">Delivered</button>
+<button onclick="cancel('${key}')">Cancel</button>
+
+</div>
+`;
+
+});
+
+document.getElementById("list").innerHTML = html;
+
+});
+
+function update(id,status){
+db.ref("bookings/"+id+"/status").set(status);
+}
+
+function cancel(id){
+db.ref("bookings/"+id).remove();
+}
+db.ref("bookings").on("value",(snap)=>{
+
+console.log("DATA RECEIVED", snap.val());
+
+});
+function update(id,status){
+firebase.database().ref("bookings/"+id+"/status").set(status);
+}
+
+</script>
+
+</body>
+</html>
