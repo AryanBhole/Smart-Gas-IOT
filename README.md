@@ -1,7 +1,6 @@
 # 🔥 Smart Gas Booking — React Project
 
-Converted from plain HTML to a structured React app.
-**UI is unchanged** — only the architecture is improved.
+
 
 ---
 
@@ -42,17 +41,7 @@ smart-gas/
 
 ---
 
-## What Changed (Architecture Only)
 
-| Old (HTML files)                          | New (React)                             |
-|-------------------------------------------|-----------------------------------------|
-| `firebase.initializeApp()` in every file  | Single `src/services/firebase.js`       |
-| Toast function copy-pasted 3× times       | `ToastContext` — one implementation     |
-| Auth state in localStorage manually       | `AuthContext` with `onAuthStateChanged` |
-| Raw Firebase listeners in `<script>`      | Custom hooks `useGasData`, `useBookings`|
-| `window.location = "dashboard.html"`      | `react-router-dom` `navigate()`         |
-| Cylinder SVG copy-pasted in 2 files       | `CylinderSVG` reusable component        |
-| Duplicate `update()` function in admin.html | Single `useBookings` hook             |
 
 ---
 
@@ -90,7 +79,6 @@ The ESP32 code writes to Firebase at:
 - `gasData/lowGas`      → "YES" / "NO"
 
 The dashboard reads these via `useGasData` hook in real time.
-No changes needed to the ESP32 code.
 
 ---
 
